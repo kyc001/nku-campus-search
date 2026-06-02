@@ -1,0 +1,154 @@
+[crawl] start total=119244 target=132244 frontier=396621 workers=64 delay=0.08
+[crawl] progress total=119365 new=122 frontier=396100 active=63 rate=3.80/s failed=376 skipped=1
+[crawl] saved 200 docs, total=119448, new=204, frontier=395825
+[crawl] progress total=119532 new=289 frontier=395551 active=64 rate=5.22/s failed=769 skipped=5
+[crawl] saved 200 docs, total=119653, new=409, frontier=395213
+[crawl] progress total=119719 new=475 frontier=395115 active=63 rate=5.79/s failed=1032 skipped=5
+[crawl] saved 200 docs, total=119850, new=606, frontier=394997
+[crawl] progress total=119956 new=716 frontier=394886 active=63 rate=7.45/s failed=1032 skipped=5
+[crawl] saved 200 docs, total=120048, new=804, frontier=394796
+[crawl] progress total=120175 new=935 frontier=394667 active=62 rate=6.82/s failed=1032 skipped=5
+[crawl] saved 200 docs, total=120253, new=1009, frontier=394624
+[crawl] progress total=120376 new=1133 frontier=394503 active=63 rate=6.31/s failed=1033 skipped=5
+[crawl] saved 200 docs, total=120453, new=1209, frontier=394426
+[crawl] progress total=120602 new=1359 frontier=394302 active=64 rate=6.99/s failed=1035 skipped=5
+[crawl] saved 200 docs, total=120649, new=1405, frontier=394275
+[crawl] progress total=120809 new=1565 frontier=394207 active=63 rate=6.56/s failed=1036 skipped=5
+[crawl] saved 200 docs, total=120850, new=1606, frontier=394193
+[crawl] progress total=121029 new=1785 frontier=394110 active=64 rate=6.92/s failed=1044 skipped=5
+[crawl] saved 200 docs, total=121047, new=1803, frontier=394097
+[crawl] progress total=121221 new=1977 frontier=394022 active=62 rate=6.06/s failed=1073 skipped=10
+[crawl] saved 200 docs, total=121246, new=2002, frontier=393967
+[crawl] progress total=121393 new=2149 frontier=393727 active=62 rate=5.36/s failed=1188 skipped=10
+[crawl] saved 200 docs, total=121453, new=2209, frontier=393618
+[crawl] progress total=121539 new=2295 frontier=393472 active=63 rate=4.50/s failed=1319 skipped=16
+[crawl] progress total=121640 new=2397 frontier=393237 active=63 rate=3.13/s failed=1464 skipped=16
+[crawl] saved 200 docs, total=121647, new=2403, frontier=393213
+[crawl] progress total=121776 new=2532 frontier=393042 active=63 rate=4.18/s failed=1549 skipped=16
+[crawl] saved 200 docs, total=121850, new=2606, frontier=392961
+[crawl] progress total=121991 new=2747 frontier=392879 active=62 rate=6.78/s failed=1560 skipped=16
+[crawl] saved 200 docs, total=122047, new=2803, frontier=392860
+[crawl] progress total=122159 new=2916 frontier=392713 active=60 rate=5.10/s failed=1707 skipped=16
+[crawl] saved 200 docs, total=122250, new=3006, frontier=392554
+[crawl] progress total=122344 new=3102 frontier=392493 active=61 rate=5.52/s failed=2016 skipped=16
+[crawl] saved 200 docs, total=122449, new=3205, frontier=392335
+[crawl] progress total=122516 new=3273 frontier=392173 active=62 rate=5.33/s failed=2223 skipped=16
+[crawl] progress total=122630 new=3386 frontier=391981 active=62 rate=3.52/s failed=2431 skipped=16
+[crawl] saved 200 docs, total=122645, new=3401, frontier=391959
+[crawl] progress total=122763 new=3523 frontier=391935 active=63 rate=4.11/s failed=2576 skipped=16
+[crawl] saved 200 docs, total=122850, new=3606, frontier=391887
+[crawl] progress total=122996 new=3752 frontier=391815 active=63 rate=7.34/s failed=2593 skipped=16
+[crawl] saved 200 docs, total=123049, new=3805, frontier=391779
+[crawl] progress total=123226 new=3984 frontier=391715 active=63 rate=7.16/s failed=2595 skipped=17
+[crawl] saved 200 docs, total=123250, new=4006, frontier=391701
+[crawl] progress total=123402 new=4158 frontier=391458 active=61 rate=5.54/s failed=2761 skipped=17
+[crawl] saved 200 docs, total=123453, new=4209, frontier=391367
+[crawl] progress total=123545 new=4301 frontier=391223 active=63 rate=4.34/s failed=2957 skipped=17
+[crawl] saved 200 docs, total=123646, new=4402, frontier=390978
+[crawl] progress total=123681 new=4438 frontier=390917 active=62 rate=4.11/s failed=3181 skipped=17
+[crawl] saved 200 docs, total=123849, new=4605, frontier=390743
+[crawl] progress total=123863 new=4622 frontier=390724 active=64 rate=5.75/s failed=3297 skipped=17
+[crawl] progress total=124020 new=4776 frontier=390498 active=60 rate=4.94/s failed=3475 skipped=17
+[crawl] saved 200 docs, total=124054, new=4810, frontier=390490
+[crawl] progress total=124207 new=4965 frontier=390377 active=64 rate=5.88/s failed=3541 skipped=17
+[crawl] saved 200 docs, total=124254, new=5010, frontier=390331
+[crawl] progress total=124431 new=5188 frontier=390195 active=63 rate=7.04/s failed=3560 skipped=27
+[crawl] saved 200 docs, total=124449, new=5205, frontier=390181
+[crawl] progress total=124611 new=5368 frontier=389900 active=62 rate=5.73/s failed=3719 skipped=27
+[crawl] saved 200 docs, total=124645, new=5401, frontier=389844
+[crawl] progress total=124803 new=5559 frontier=389729 active=64 rate=6.05/s failed=3850 skipped=27
+[crawl] saved 200 docs, total=124851, new=5607, frontier=389699
+[crawl] progress total=125020 new=5776 frontier=389614 active=64 rate=6.92/s failed=3887 skipped=27
+[crawl] saved 200 docs, total=125047, new=5803, frontier=389605
+[crawl] progress total=125202 new=5959 frontier=389300 active=63 rate=5.75/s failed=4085 skipped=49
+[crawl] saved 200 docs, total=125253, new=6009, frontier=389224
+[crawl] progress total=125437 new=6194 frontier=389066 active=63 rate=7.53/s failed=4106 skipped=75
+[crawl] saved 200 docs, total=125447, new=6203, frontier=389066
+[crawl] progress total=125633 new=6389 frontier=388975 active=63 rate=6.23/s failed=4191 skipped=75
+[crawl] saved 200 docs, total=125653, new=6409, frontier=388983
+[crawl] progress total=125803 new=6559 frontier=388873 active=64 rate=5.36/s failed=4252 skipped=75
+[crawl] saved 200 docs, total=125852, new=6608, frontier=388797
+[crawl] progress total=125967 new=6723 frontier=388719 active=60 rate=5.18/s failed=4393 skipped=75
+[crawl] saved 200 docs, total=126047, new=6803, frontier=388562
+[crawl] progress total=126105 new=6862 frontier=388490 active=63 rate=4.21/s failed=4590 skipped=80
+[crawl] saved 200 docs, total=126251, new=7007, frontier=388433
+[crawl] progress total=126426 new=7183 frontier=388484 active=63 rate=10.07/s failed=4650 skipped=80
+[crawl] saved 200 docs, total=126451, new=7207, frontier=388479
+[crawl] saved 200 docs, total=126647, new=7403, frontier=388643
+[crawl] saved 200 docs, total=126848, new=7604, frontier=388620
+[crawl] progress total=126887 new=7643 frontier=388605 active=64 rate=14.85/s failed=4819 skipped=82
+[crawl] saved 200 docs, total=127056, new=7812, frontier=388604
+[crawl] progress total=127133 new=7889 frontier=388585 active=62 rate=7.74/s failed=4823 skipped=84
+[crawl] saved 200 docs, total=127252, new=8008, frontier=388571
+[crawl] progress total=127354 new=8110 frontier=388592 active=63 rate=6.94/s failed=4843 skipped=84
+[crawl] saved 200 docs, total=127451, new=8207, frontier=388526
+[crawl] progress total=127516 new=8273 frontier=388559 active=62 rate=5.02/s failed=5000 skipped=84
+[crawl] saved 200 docs, total=127650, new=8406, frontier=388636
+[crawl] progress total=127742 new=8498 frontier=388838 active=61 rate=7.13/s failed=5077 skipped=85
+[crawl] saved 200 docs, total=127849, new=8605, frontier=388950
+[crawl] progress total=127917 new=8673 frontier=388947 active=64 rate=5.59/s failed=5210 skipped=87
+[crawl] saved 200 docs, total=128046, new=8802, frontier=388987
+[crawl] progress total=128191 new=8948 frontier=389070 active=63 rate=8.78/s failed=5220 skipped=87
+[crawl] saved 200 docs, total=128256, new=9012, frontier=389062
+[crawl] saved 200 docs, total=128453, new=9209, frontier=389014
+[crawl] saved 200 docs, total=128650, new=9406, frontier=389098
+[crawl] progress total=128772 new=9528 frontier=389222 active=63 rate=18.77/s failed=5261 skipped=98
+[crawl] saved 200 docs, total=128857, new=9613, frontier=389201
+[crawl] saved 200 docs, total=129049, new=9805, frontier=389174
+[crawl] saved 200 docs, total=129249, new=10005, frontier=389207
+[crawl] progress total=129257 new=10014 frontier=389207 active=62 rate=15.76/s failed=5330 skipped=102
+[crawl] saved 200 docs, total=129448, new=10204, frontier=389118
+[crawl] saved 200 docs, total=129671, new=10427, frontier=389074
+[crawl] progress total=129710 new=10466 frontier=389054 active=64 rate=14.69/s failed=5370 skipped=102
+[crawl] saved 200 docs, total=129846, new=10602, frontier=389119
+[crawl] progress total=130004 new=10762 frontier=389129 active=64 rate=9.27/s failed=5376 skipped=102
+[crawl] saved 200 docs, total=130052, new=10808, frontier=389099
+[crawl] saved 200 docs, total=130249, new=11005, frontier=388902
+[crawl] progress total=130267 new=11025 frontier=388879 active=64 rate=8.37/s failed=5384 skipped=178
+[crawl] saved 200 docs, total=130450, new=11206, frontier=388798
+[crawl] saved 200 docs, total=130652, new=11408, frontier=388686
+[crawl] progress total=130669 new=11426 frontier=388674 active=63 rate=12.86/s failed=5384 skipped=178
+[crawl] saved 200 docs, total=130849, new=11605, frontier=388515
+[crawl] progress total=131024 new=11780 frontier=388643 active=64 rate=11.36/s failed=5441 skipped=178
+[crawl] saved 200 docs, total=131049, new=11805, frontier=388627
+[crawl] progress total=131164 new=11922 frontier=388486 active=60 rate=4.05/s failed=5672 skipped=178
+[crawl] saved 200 docs, total=131248, new=12004, frontier=388338
+[crawl] progress total=131285 new=12042 frontier=388263 active=60 rate=3.49/s failed=5979 skipped=178
+[crawl] progress total=131450 new=12208 frontier=387740 active=58 rate=5.02/s failed=6601 skipped=178
+[crawl] saved 200 docs, total=131452, new=12208, frontier=387738
+[crawl] progress total=131647 new=12403 frontier=386502 active=56 rate=6.31/s failed=7697 skipped=178
+[crawl] saved 200 docs, total=131650, new=12406, frontier=386492
+[crawl] progress total=131834 new=12590 frontier=385596 active=62 rate=5.99/s failed=8578 skipped=178
+[crawl] saved 200 docs, total=131851, new=12607, frontier=385546
+[crawl] saved 200 docs, total=132048, new=12804, frontier=385135
+[crawl] progress total=132048 new=12805 frontier=385134 active=64 rate=6.45/s failed=8950 skipped=178
+[crawl] progress total=132212 new=12970 frontier=384854 active=64 rate=5.05/s failed=9176 skipped=178
+[crawl] saved 200 docs, total=132246, new=13002, frontier=384790
+[crawl] saved 52 docs, total=132296, new=13052, frontier=384801
+[index] tokenized 5000/132296
+[index] tokenized 10000/132296
+[index] tokenized 15000/132296
+[index] tokenized 20000/132296
+[index] tokenized 25000/132296
+[index] tokenized 30000/132296
+[index] tokenized 35000/132296
+[index] tokenized 40000/132296
+[index] tokenized 45000/132296
+[index] tokenized 50000/132296
+[index] tokenized 55000/132296
+[index] tokenized 60000/132296
+[index] tokenized 65000/132296
+[index] tokenized 70000/132296
+[index] tokenized 75000/132296
+[index] tokenized 80000/132296
+[index] tokenized 85000/132296
+[index] tokenized 90000/132296
+[index] tokenized 95000/132296
+[index] tokenized 100000/132296
+[index] tokenized 105000/132296
+[index] tokenized 110000/132296
+[index] tokenized 115000/132296
+[index] tokenized 120000/132296
+[index] tokenized 125000/132296
+[index] tokenized 130000/132296
+定向增量抓取完成，frontier 新增候选 160000 条，本次返回 0 条。

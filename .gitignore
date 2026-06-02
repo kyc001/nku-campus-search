@@ -1,0 +1,65 @@
+# Local AI / agent workspace state
+.agents/
+.claude/
+.codex/
+.trellis/
+AGENTS.md
+HANDOVER.md
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Pixi / local environments
+代码/.pixi/
+.venv/
+venv/
+env/
+
+# Secrets and local runtime configuration
+.env
+.env.*
+!.env.example
+
+# Large crawl corpus, indexes, and runtime data
+代码/data/attachments/
+代码/data/snapshots/
+代码/data/documents*.jsonl*
+代码/data/search_index*.json
+代码/data/links*.tsv
+代码/data/frontier*.txt*
+代码/data/*.sqlite3
+代码/data/*.db
+代码/data/*.db-*
+代码/data/*.tmp
+代码/data/*.log
+
+# Runtime logs and scratch output
+tmp/
+代码/tmp/
+report/tmp/
+*.pid
+
+# Local Elasticsearch distributions and downloaded tools
+tools/elasticsearch-*/
+tools/*.zip
+tools/*.tar.gz
+
+# Generated submission packages
+/*_hw4/
+/*_hw4.zip
+/*_hw4.rar
+/*_hw4.7z
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo

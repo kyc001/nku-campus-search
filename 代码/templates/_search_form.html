@@ -1,0 +1,53 @@
+<form class="search-form" action="{{ url_for('search') }}" method="get" autocomplete="off">
+  <div class="query-line">
+    <input id="query-input" name="q" value="{{ q|default('') }}" autocomplete="off" placeholder="搜索南开资源">
+    <button type="submit" aria-label="搜索">
+      <span aria-hidden="true">⌕</span>
+    </button>
+  </div>
+  <div id="suggest-box" class="suggest-box" hidden></div>
+  <div class="filters">
+    <label>
+      站点
+      <input name="site" value="{{ site|default('') }}" placeholder="cc.nankai.edu.cn" autocomplete="off" autocapitalize="none" spellcheck="false">
+    </label>
+    <label>
+      类型
+      <select name="filetype">
+        {% set current_type = filetype|default('') %}
+        <option value="" {% if not current_type %}selected{% endif %}>全部</option>
+        {% for item in ["html", "pdf", "doc", "docx", "xls", "xlsx"] %}
+          <option value="{{ item }}" {% if current_type == item %}selected{% endif %}>{{ item }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      后端
+      <select name="backend">
+        {% set current_backend = backend|default('auto') %}
+        <option value="auto" {% if current_backend == "auto" %}selected{% endif %}>自动</option>
+        <option value="local" {% if current_backend == "local" %}selected{% endif %}>本地 VSM</option>
+        <option value="es" {% if current_backend == "es" %}selected{% endif %}>Elasticsearch</option>
+      </select>
+    </label>
+  </div>
+  <div class="intent-row" aria-label="主题过滤建议">
+    {% for label, query in [
+      ("教务", "选课 site:jwc.nankai.edu.cn"),
+      ("科研", "学术 讲座 site:news.nankai.edu.cn"),
+      ("招生", "招生 录取"),
+      ("就业", "就业 实习 双选会 site:career.nankai.edu.cn"),
+      ("图书馆", "图书馆 数据库 CNKI")
+    ] %}
+      <a href="{{ url_for('search', q=query) }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+  {% set phrase_query = '"南开 大学"' %}
+  <div class="syntax-row" aria-label="高级语法示例">
+    <a href="{{ url_for('search', q='选课 site:jwc.nankai.edu.cn') }}">site:</a>
+    <a href="{{ url_for('search', q='实验 教学 filetype:pdf') }}">filetype:</a>
+    <a href="{{ url_for('search', q=phrase_query) }}">短语</a>
+    <a href="{{ url_for('search', q='温*') }}">通配</a>
+    <a href="{{ url_for('search', q='/信息.{0,2}/') }}">正则</a>
+  </div>
+</form>

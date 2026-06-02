@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}个性化演示 - {{ q }}{% endblock %}
+{% block content %}
+<section class="home-panel demo-head">
+  <div>
+    <h1>个性化排序演示</h1>
+    <p>同一个查询先进入同一套 VSM + PageRank 候选池，再叠加角色、兴趣、资源类型和历史点击信号；页面直接展示排序变化和推荐理由。</p>
+  </div>
+  <div class="demo-query-box">
+    <form class="compact-query" action="{{ url_for('personalization_demo') }}" method="get">
+      <input name="q" value="{{ q }}" aria-label="演示查询">
+      <button type="submit">对比</button>
+    </form>
+    <div class="case-links" aria-label="演示案例">
+      {% for item in case_queries %}
+        <a href="{{ url_for('personalization_demo', q=item) }}" class="{{ 'active' if item == q else '' }}">{{ item }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="personal-grid">
+  {% for panel in panels %}
+    {% set response = panel.response %}
+    <article class="personal-panel">
+      <header>
+        <span>{{ panel.label }}</span>
+        <strong>{{ panel.note }}</strong>
+      </header>
+      <div class="profile-tags" aria-label="画像信号">
+        {% for tag in panel.tags %}
+          <span>{{ tag }}</span>
+        {% endfor %}
+      </div>
+      <div class="mini-meta">
+        <span>命中 {{ response.total }} 条</span>
+        <span>{{ "%.1f"|format(response.elapsed_ms) }} ms</span>
+        <span>Top10 HTML {{ panel.html_top }}</span>
+        <span>Top10 文档 {{ panel.doc_top }}</span>
+      </div>
+      <div class="delta-banner {{ 'is-strong' if panel.top_changed else '' }}">
+        {{ panel.delta_label }}
+      </div>
+      <div class="profile-meter" aria-label="Top10 类型倾向">
+        <div class="meter-track">
+          <span style="width: {{ panel.html_percent }}%"></span>
+          <b style="width: {{ panel.doc_percent }}%"></b>
+        </div>
+        <p>
+          <strong>{{ panel.focus }}</strong>
+          <span>HTML {{ panel.html_percent }}% / 文档 {{ panel.doc_percent }}%</span>
+        </p>
+      </div>
+      <h2>Top 结果</h2>
+      {% for item in panel.results %}
+        {% if item.ranking_signals is defined %}
+          {% set doc = item.document %}
+          {% set title = item.display_title or doc.title %}
+          {% set snippet = item.snippet %}
+          {% set signals = item.ranking_signals %}
+        {% elif item.document is defined %}
+          {% set doc = item.document %}
+          {% set title = item.display_title or doc.title %}
+          {% set snippet = item.snippet %}
+          {% set signals = item.reasons %}
+        {% else %}
+          {% set doc = item %}
+          {% set title = doc.title %}
+          {% set snippet = "" %}
+          {% set signals = [] %}
+        {% endif %}
+        <a class="mini-result" href="{{ doc.url }}" target="_blank" rel="noreferrer">
+          <span class="type-badge">{{ doc.doc_type }}</span>
+          <strong>{{ title }}</strong>
+          {% if snippet %}
+            <p>{{ snippet|safe }}</p>
+          {% endif %}
+          <div class="reason-row">
+            {% for signal in signals[:3] %}
+              <span>{{ signal }}</span>
+            {% endfor %}
+          </div>
+          <small>{{ doc.host }}</small>
+        </a>
+      {% endfor %}
+      <h2>相关推荐</h2>
+      {% for rec in panel.recommendations[:3] %}
+        {% set doc = rec.document %}
+        <a class="mini-result recommend-mini" href="{{ url_for('search', q=rec.display_title or doc.title) }}">
+          <em>{{ rec.category }}</em>
+          <span class="type-badge">{{ doc.doc_type }}</span>
+          <strong>{{ rec.display_title or doc.title }}</strong>
+          {% if rec.snippet %}
+            <p>{{ rec.snippet|safe }}</p>
+          {% endif %}
+          <div class="reason-row">
+            {% for reason in rec.reasons[:3] %}
+              <span>{{ reason }}</span>
+            {% endfor %}
+          </div>
+          <small>{{ doc.host }}</small>
+        </a>
+      {% else %}
+        <p class="muted">暂无推荐</p>
+      {% endfor %}
+    </article>
+  {% endfor %}
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}查询日志{% endblock %}
+{% block content %}
+<section class="home-panel">
+  <div class="hero-head">
+    <div>
+      <h1>查询日志</h1>
+      <p>记录你在本系统的全部检索历史，支持关键字过滤与翻页。</p>
+    </div>
+    <form action="{{ url_for('clear_query_history') }}" method="post" class="maintenance">
+      <button type="submit">清空日志</button>
+    </form>
+  </div>
+  <form class="search-form" action="{{ url_for('history_page') }}" method="get">
+    <div class="query-line">
+      <input name="q" value="{{ keyword|default('') }}" placeholder="按关键词过滤历史，例如 信息检索">
+      <button type="submit" aria-label="过滤"><span aria-hidden="true">⌕</span></button>
+    </div>
+  </form>
+</section>
+
+<section class="workspace-grid" style="grid-template-columns: 1fr;">
+  <section>
+    <div class="section-head">
+      <h2>共 {{ total }} 条记录{% if keyword %} · 关键词「{{ keyword }}」{% endif %}</h2>
+    </div>
+    {% if rows %}
+      <div class="history-list">
+        {% for item in rows %}
+          <a href="{{ url_for('search', q=item.query) }}">
+            <span>{{ item.query }}</span>
+            <small>{{ item.ts }} · {{ item.result_count }} 条</small>
+          </a>
+        {% endfor %}
+      </div>
+      {% set total_pages = (total + page_size - 1) // page_size %}
+      {% if total_pages > 1 %}
+        <nav class="pagination">
+          {% if page > 1 %}
+            <a href="{{ url_for('history_page', q=keyword, page=page - 1) }}">上一页</a>
+          {% endif %}
+          <span>第 {{ page }} / {{ total_pages }} 页</span>
+          {% if page < total_pages %}
+            <a href="{{ url_for('history_page', q=keyword, page=page + 1) }}">下一页</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    {% else %}
+      <p class="muted">暂无历史查询。可尝试 <a href="{{ url_for('index') }}">回到首页</a> 进行检索。</p>
+    {% endif %}
+  </section>
+</section>
+{% endblock %}

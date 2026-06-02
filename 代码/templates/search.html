@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}搜索结果 - {{ q }}{% endblock %}
+{% block content %}
+{% include "_search_form.html" %}
+
+{% if warnings %}
+  <div class="query-warnings">
+    {% for warning in warnings %}
+      <p>{{ warning }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="result-meta">
+  <span>命中 {{ response.total }} 条</span>
+  <span>候选 {{ response.candidate_total }} 条</span>
+  <span>{{ "%.1f"|format(response.elapsed_ms) }} ms</span>
+  <span>{{ "Elasticsearch 召回" if response.backend == "elasticsearch" else "本地倒排召回" }}</span>
+  <span>VSM + PageRank 重排</span>
+  {% if user %}<span>个性化排序：{{ user.role|default('登录用户') }}</span>{% endif %}
+  {% if response.parsed.site %}<span>site:{{ response.parsed.site }}</span>{% endif %}
+  {% if response.parsed.filetype %}<span>filetype:{{ response.parsed.filetype }}</span>{% endif %}
+  {% if response.parsed.phrases %}<span>短语</span>{% endif %}
+  {% if response.parsed.wildcard or response.parsed.regex %}<span>通配</span>{% endif %}
+</div>
+
+<section class="search-summary">
+  <div>
+    <span>排序链路</span>
+    <strong>{{ "Elasticsearch 召回" if response.backend == "elasticsearch" else "本地倒排召回" }} → VSM → PageRank → 多样性</strong>
+  </div>
+  <div>
+    <span>当前查询</span>
+    <strong>{{ q or "浏览全部索引" }}</strong>
+  </div>
+  <div>
+    <span>结果质量</span>
+    <strong>弱标题/登录页自动降权，单站点首屏限流</strong>
+  </div>
+</section>
+
+<div class="content-grid">
+  <section class="results">
+    {% for item in response.results %}
+      {% set doc = item.document %}
+      <article class="result-card">
+        <div class="result-title-row">
+          <span class="type-badge">{{ doc.doc_type }}</span>
+          <h2><a data-click-url="{{ doc.url }}" data-query="{{ q }}" href="{{ doc.url }}" target="_blank" rel="noreferrer">{{ item.display_title or doc.title }}</a></h2>
+        </div>
+        <p class="url-line">{{ doc.url }}</p>
+        <div class="snippet-block">
+          <div class="snippet-head">
+            <span>命中摘要</span>
+            {% if response.parsed.terms %}
+              <div class="snippet-terms" aria-label="命中词">
+                {% for term in response.parsed.terms[:5] %}
+                  <b>{{ term }}</b>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <p class="snippet">{% if item.snippet %}{{ item.snippet|safe }}{% else %}该结果暂无可展示正文摘要。{% endif %}</p>
+        </div>
+        <div class="signal-row">
+          {% for signal in item.ranking_signals %}
+            <span>{{ signal }}</span>
+          {% endfor %}
+          {% for feature in item.matched_features %}
+            <span>{{ feature }}</span>
+          {% endfor %}
+        </div>
+        <div class="actions">
+          {% if doc.snapshot_path %}
+            <a href="{{ url_for('snapshot', url=doc.url) }}" target="_blank">快照</a>
+          {% endif %}
+          {% if doc.attachment_path %}
+            <a href="{{ url_for('download', url=doc.url) }}">下载</a>
+          {% endif %}
+          <span>{{ doc.host }}</span>
+        </div>
+        <details class="score-details">
+          <summary>排序证据</summary>
+          <span>PageRank {{ "%.3f"|format(doc.pagerank) }}</span>
+          <span>最终得分 {{ "%.3f"|format(item.score) }}</span>
+          <span>VSM + PageRank + 新鲜度{% if user %} + 个性化{% endif %}</span>
+        </details>
+      </article>
+    {% else %}
+      <p class="muted">没有匹配结果</p>
+    {% endfor %}
+
+    {% if response.total > response.page_size %}
+      <nav class="pagination">
+        {% if response.page > 1 %}
+          <a href="{{ url_for('search', q=q, site=site, filetype=filetype, backend=backend, page=response.page - 1) }}">上一页</a>
+        {% endif %}
+        <span>第 {{ response.page }} 页</span>
+        {% if response.page * response.page_size < response.total %}
+          <a href="{{ url_for('search', q=q, site=site, filetype=filetype, backend=backend, page=response.page + 1) }}">下一页</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </section>
+
+  <aside class="recommend">
+    <h2>相关推荐</h2>
+    {% for rec in response.recommendations %}
+      {% set doc = rec.document %}
+      <a class="recommend-item" href="{{ url_for('search', q=rec.display_title or doc.title) }}">
+        <div class="recommend-head">
+          <span class="type-badge">{{ doc.doc_type }}</span>
+          <em>{{ rec.category }}</em>
+        </div>
+        <strong>{{ rec.display_title or doc.title }}</strong>
+        {% if rec.snippet %}
+          <p>{{ rec.snippet|safe }}</p>
+        {% endif %}
+        <div class="reason-row">
+          {% for reason in rec.reasons[:3] %}
+            <span>{{ reason }}</span>
+          {% endfor %}
+        </div>
+        <small>{{ doc.host }}</small>
+      </a>
+    {% else %}
+      <p class="muted">暂无推荐</p>
+    {% endfor %}
+    <h2 class="side-title">继续筛选</h2>
+    <div class="refine-list">
+      {% if response.parsed.site %}
+        <a href="{{ url_for('search', q=q, filetype=filetype, backend=backend) }}">移除 site</a>
+      {% endif %}
+      {% if response.parsed.filetype %}
+        <a href="{{ url_for('search', q=q, site=site, backend=backend) }}">移除 filetype</a>
+      {% endif %}
+      <a href="{{ url_for('search', q=q ~ ' filetype:pdf', site=site, backend=backend) }}">只看 PDF</a>
+      <a href="{{ url_for('search', q=q ~ ' site:news.nankai.edu.cn', backend=backend) }}">南开新闻网</a>
+      <a href="{{ url_for('personalization_demo', q=q or '课程') }}">个性化对比</a>
+    </div>
+  </aside>
+</div>
+{% endblock %}

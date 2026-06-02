@@ -1,0 +1,32 @@
+[workspace]
+channels = ["conda-forge"]
+name = "nku-web-search-hw4"
+platforms = ["win-64"]
+version = "0.1.0"
+
+[dependencies]
+beautifulsoup4 = ">=4.12"
+flask = ">=3.0"
+jieba = ">=0.42"
+lxml = ">=5.0"
+openpyxl = ">=3.1"
+pypdf = ">=4.0"
+python = ">=3.11,<3.13"
+python-docx = ">=1.1"
+reportlab = ">=4.0"
+requests = ">=2.31"
+pytest = ">=8.0"
+elasticsearch = ">=9.4.0,<10"
+
+[tasks]
+init-demo = "python -m nku_search.cli init-demo"
+build-index = "python -m nku_search.cli build-index"
+build-es-index = "python -m nku_search.cli build-es-index"
+serve = "python -m nku_search.web"
+test = "python -m pytest tests"
+report = "python -m nku_search.cli build-report"
+package = "python -m nku_search.cli package-submit"
+search = "python -m nku_search.cli search"
+crawl = "python -m nku_search.cli crawl"
+targeted-crawl = "python -m nku_search.cli targeted-crawl"
+selfcheck = "python -m nku_search.selfcheck --all"

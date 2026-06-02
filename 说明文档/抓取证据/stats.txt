@@ -1,0 +1,17 @@
+NKU Web Search Engine crawl evidence
+
+documents: 132296
+external_count: 0
+hosts: 356
+html_snapshots: 124844
+attachments_or_attachment_urls: 7452
+documents_jsonl_bytes: 3546764538
+search_index_json_bytes: 1984054506
+
+doc_type_distribution:
+  html: 124844
+  pdf: 3902
+  docx: 1417
+  doc: 1411
+  xlsx: 547
+  xls: 175

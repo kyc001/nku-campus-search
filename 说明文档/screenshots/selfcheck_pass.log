@@ -1,0 +1,23 @@
+=========== SELFCHECK ===========
+[index] documents >= 2000          PASS 132296
+[index] title field exists         PASS
+[index] anchor field exists        PASS
+[index] pagerank computed          PASS
+[query] site                       PASS
+[query] filetype                   PASS
+[query] phrase                     PASS
+[query] wildcard                   PASS
+[query] regex                      PASS
+[query] snapshot render            PASS
+[query] attachment file            PASS
+[quality] top results readable     PASS
+[ranking] VSM cosine               PASS cos=1.000
+[elastic] optional recall DSL      PASS
+[personalize] ranking/recommend    PASS
+[web] index                        PASS
+[web] search                       PASS
+[web] suggest                      PASS
+[web] snapshot                     PASS
+[web] download                     PASS
+=========== SUMMARY =============
+ALL PASS - ready to submit.

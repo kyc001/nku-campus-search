@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}南开校内搜索{% endblock %}
+{% block content %}
+<section class="home-panel">
+  <div class="hero-head">
+    <div>
+      <h1>南开校内搜索</h1>
+      <p>面向教务、科研、招生、就业和院系资源的校内垂直检索。候选可由 Elasticsearch 或本地倒排召回，最终统一由 VSM + PageRank 重排。</p>
+    </div>
+    <div class="backend-card">
+      <span>当前模式</span>
+      <strong>{{ search_stats.backend_label }}</strong>
+      <small>{{ search_stats.backend_detail }}</small>
+    </div>
+  </div>
+  {% include "_search_form.html" %}
+  <div class="quick-panel" aria-label="常用检索入口">
+    {% for label, query in quick_queries %}
+      <a href="{{ url_for('search', q=query) }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="stats-grid">
+  <div>
+    <span>文档</span>
+    <strong>{{ search_stats.documents }}</strong>
+  </div>
+  <div>
+    <span>主机</span>
+    <strong>{{ search_stats.hosts }}</strong>
+  </div>
+  <div>
+    <span>快照</span>
+    <strong>{{ search_stats.snapshots }}</strong>
+  </div>
+  <div>
+    <span>附件</span>
+    <strong>{{ search_stats.attachments }}</strong>
+  </div>
+  <div>
+    <span>可读结果</span>
+    <strong>{{ "%.0f%%"|format(search_stats.quality_ratio * 100) }}</strong>
+  </div>
+</section>
+
+<section class="workspace-grid">
+  <section>
+    <div class="section-head">
+      <h2>查询历史</h2>
+      <form action="{{ url_for('clear_query_history') }}" method="post">
+        <button class="text-button" type="submit">清空</button>
+      </form>
+    </div>
+    <div class="history-list">
+      {% for item in history %}
+        <a href="{{ url_for('search', q=item.query) }}">
+          <span>{{ item.query }}</span>
+          <small>{{ item.result_count }} 条</small>
+        </a>
+      {% else %}
+        <p class="muted">暂无历史</p>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>索引概况</h2>
+    </div>
+    <div class="quality-strip">
+      <span>登录/跳转页已降权</span>
+      <strong>{{ search_stats.noise_pages }}</strong>
+    </div>
+    <div class="type-list">
+      {% for dtype, count in search_stats.type_counts.items() %}
+        <a href="{{ url_for('search', q='南开', filetype=dtype) }}">
+          <span>{{ dtype }}</span>
+          <strong>{{ count }}</strong>
+        </a>
+      {% endfor %}
+    </div>
+    {% if search_stats.top_hosts %}
+      <div class="section-head" style="margin-top:14px;">
+        <h2>热门主机</h2>
+      </div>
+      <div class="type-list">
+        {% for host, count in search_stats.top_hosts %}
+          <a href="{{ url_for('search', q='南开', site=host) }}">
+            <span>{{ host }}</span>
+            <strong>{{ count }}</strong>
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% if search_stats.top_tags %}
+      <div class="section-head" style="margin-top:14px;">
+        <h2>主题标签</h2>
+      </div>
+      <div class="syntax-row">
+        {% for tag, count in search_stats.top_tags %}
+          <a href="{{ url_for('search', q=tag) }}">{{ tag }} · {{ count }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <p class="muted backend-note">ES 地址：{{ search_stats.es_url }} / {{ search_stats.es_index }}</p>
+    <p class="muted backend-note">后端配置默认值：{{ search_stats.backend_mode }}</p>
+    <p class="muted backend-note">追加 2~3 万条建议先执行 `pixi run targeted-crawl -- --dry-run` 查看定向 frontier。</p>
+  </section>
+</section>
+{% endblock %}
